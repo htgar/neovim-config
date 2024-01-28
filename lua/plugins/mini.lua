@@ -3,12 +3,15 @@ return {
     "echasnovski/mini.nvim",
     version = false,
     config = function()
+      require('mini.extra').setup()
+
       -- Settings
       require("mini.basics").setup()
       -- Options (Not covered by Mini Basic)
       vim.opt.tabstop = 2
       vim.opt.shiftwidth = 2
       vim.opt.expandtab = true
+      vim.opt.scrolloff = 4
 
       vim.opt.relativenumber = true
 
@@ -25,6 +28,7 @@ return {
       })
 
       require("mini.bracketed").setup()
+      require("mini.bufremove").setup()
       require("mini.comment").setup()
       require("mini.cursorword").setup()
       require('mini.pairs').setup()
@@ -35,31 +39,30 @@ return {
       hipatterns.setup({
         highlighters = {
           -- Highlight standalone 'FIXME', 'HACK', 'TODO', 'NOTE'
-          fixme = { pattern = '%f[%w]()FIXME()%f[%W]', group = 'MiniHipatternsFixme' },
-          hack  = { pattern = '%f[%w]()HACK()%f[%W]',  group = 'MiniHipatternsHack'  },
-          todo  = { pattern = '%f[%w]()TODO()%f[%W]',  group = 'MiniHipatternsTodo'  },
-          note  = { pattern = '%f[%w]()NOTE()%f[%W]',  group = 'MiniHipatternsNote'  },
+          fixme     = { pattern = '%f[%w]()FIXME()%f[%W]', group = 'MiniHipatternsFixme' },
+          hack      = { pattern = '%f[%w]()HACK()%f[%W]', group = 'MiniHipatternsHack' },
+          todo      = { pattern = '%f[%w]()TODO()%f[%W]', group = 'MiniHipatternsTodo' },
+          note      = { pattern = '%f[%w]()NOTE()%f[%W]', group = 'MiniHipatternsNote' },
 
           -- Highlight hex color strings (`#rrggbb`) using that color
           hex_color = hipatterns.gen_highlighter.hex_color(),
         },
       })
       require("mini.statusline").setup()
-      require('mini.indentscope').setup{
+      require('mini.indentscope').setup {
         symbol = "|",
       }
       require('mini.trailspace').setup()
 
       -- Core Stuff
-      require("mini.files").setup{
+      require("mini.files").setup {
         options = {
           use_as_default_explorer = true,
         }
       }
+
       require('mini.completion').setup()
       require('mini.pick').setup()
-      require('mini.visits').setup()
-
 
       local miniclue = require('mini.clue')
       miniclue.setup({
@@ -115,16 +118,12 @@ return {
             submode_resize = true,
           }),
           miniclue.gen_clues.z(),
-          { mode = 'n', keys = ']b', postkeys = ']' },
-          { mode = 'n', keys = ']w', postkeys = ']' },
-
-          { mode = 'n', keys = '[b', postkeys = '[' },
-          { mode = 'n', keys = '[w', postkeys = '[' },
+          { mode = 'n', keys = '<Leader>b', desc = '+Buffers' },
+          { mode = 'n', keys = '<Leader>f', desc = '+Files' },
+          { mode = 'n', keys = '<Leader>l', desc = '+LSP' },
         },
 
       })
-      -- Misc
-     require('mini.extra').setup()
     end
   },
 }
