@@ -104,6 +104,9 @@ return {
           -- Leader
           { mode = 'n', keys = '<Leader>' },
           { mode = 'x', keys = '<Leader>' },
+
+          -- UI Controls 
+          { mode = 'n', keys = '\\' },
         },
 
         clues = {
