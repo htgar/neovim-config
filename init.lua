@@ -40,6 +40,7 @@ require("lazy").setup({
 			-- Document existing key chains
 			require("which-key").register({
 				["<leader>f"] = { name = "[F]ind", _ = "which_key_ignore" },
+				["<leader>g"] = { name = "[G]it", _ = "which_key_ignore" },
 				["<leader>l"] = { name = "[L]sp", _ = "which_key_ignore" },
 			})
 		end,
@@ -64,6 +65,9 @@ require("lazy").setup({
 			require("mini.bufremove").setup()
 			require("mini.cursorword").setup()
 			require("mini.diff").setup()
+			require("mini.git").setup()
+			local rhs = "<Cmd>lua MiniGit.show_at_cursor()<CR>"
+			vim.keymap.set({ "n", "x" }, "<Leader>gs", rhs, { desc = "Show at cursor" })
 			require("mini.pairs").setup({
 				mappings = {
 					["`"] = false,
@@ -91,10 +95,10 @@ require("lazy").setup({
 		opts = {},
 		-- Optional dependencies
 		dependencies = { "nvim-tree/nvim-web-devicons" },
-        config = function()
-            require("oil").setup()
-            vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
-    end
+		config = function()
+			require("oil").setup()
+			vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+		end,
 	},
 
 	"tpope/vim-rsi",
