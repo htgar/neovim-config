@@ -62,7 +62,6 @@ require("lazy").setup({
 			require("mini.ai").setup()
 			require("mini.bracketed").setup()
 			require("mini.bufremove").setup()
-			require("mini.comment").setup()
 			require("mini.cursorword").setup()
 			require("mini.diff").setup()
 			require("mini.pairs").setup({
@@ -203,17 +202,6 @@ require("lazy").setup({
 			--  into multiple repos for maintenance purposes.
 			"hrsh7th/cmp-nvim-lsp",
 			"hrsh7th/cmp-path",
-			{
-				"jmbuhr/otter.nvim",
-				opts = {
-					buffers = {
-						set_filetype = true,
-					},
-				},
-				config = function()
-					require("otter").activate(nil, true, true, nil)
-				end,
-			},
 		},
 		config = function()
 			-- See `:help cmp`
@@ -310,7 +298,6 @@ require("lazy").setup({
 					--    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
 				}),
 				sources = {
-					{ name = "otter" },
 					{ name = "nvim_lsp" },
 					{ name = "luasnip" },
 					{ name = "path" },
