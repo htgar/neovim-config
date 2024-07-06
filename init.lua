@@ -58,7 +58,6 @@ require("lazy").setup({
 			vim.opt.expandtab = true
 			vim.opt.scrolloff = 4
 			vim.opt.autoindent = true
-			vim.opt.conceallevel = 2
 
 			require("mini.ai").setup()
 			require("mini.bracketed").setup()
