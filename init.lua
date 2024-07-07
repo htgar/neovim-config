@@ -102,6 +102,29 @@ require("lazy").setup({
 
 	"tpope/vim-rsi",
 
+	{
+		"aserowy/tmux.nvim",
+		config = function()
+			require("tmux").setup({
+				navigation = {
+					enable_default_keybindings = false,
+				},
+				resize = {
+					enable_default_keybindings = false,
+				},
+			})
+			vim.keymap.set("n", "<M-h>", "<cmd>lua require('tmux').move_left()<cr>")
+			vim.keymap.set("n", "<M-j>", "<cmd>lua require('tmux').move_bottom()<cr>")
+			vim.keymap.set("n", "<M-k>", "<cmd>lua require('tmux').move_top()<cr>")
+			vim.keymap.set("n", "<M-l>", "<cmd>lua require('tmux').move_right()<cr>")
+
+			vim.keymap.set("n", "<M-H>", "<cmd>lua require('tmux').resize_left()<cr>")
+			vim.keymap.set("n", "<M-J>", "<cmd>lua require('tmux').resize_bottom()<cr>")
+			vim.keymap.set("n", "<M-K>", "<cmd>lua require('tmux').resize_top()<cr>")
+			vim.keymap.set("n", "<M-L>", "<cmd>lua require('tmux').resize_right()<cr>")
+		end,
+	},
+
 	-- UI
 	{
 		"folke/noice.nvim",
@@ -433,20 +456,20 @@ require("lazy").setup({
 				-- tsserver = {},
 				--
 
-				lua_ls = {
-					-- cmd = {...},
-					-- filetypes = { ...},
-					-- capabilities = {},
-					settings = {
-						Lua = {
-							completion = {
-								callSnippet = "Replace",
-							},
-							-- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-							-- diagnostics = { disable = { 'missing-fields' } },
-						},
-					},
-				},
+				-- lua_ls = {
+				-- 	-- cmd = {...},
+				-- 	-- filetypes = { ...},
+				-- 	-- capabilities = {},
+				-- 	settings = {
+				-- 		Lua = {
+				-- 			completion = {
+				-- 				callSnippet = "Replace",
+				-- 			},
+				-- 			-- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
+				-- 			-- diagnostics = { disable = { 'missing-fields' } },
+				-- 		},
+				-- 	},
+				-- },
 			}
 			require("mason").setup()
 			local ensure_installed = vim.tbl_keys(servers or {})
@@ -465,6 +488,29 @@ require("lazy").setup({
 						require("lspconfig")[server_name].setup(server)
 					end,
 				},
+			})
+		end,
+	},
+
+	{
+		"folke/lazydev.nvim",
+		ft = "lua", -- only load on lua files
+		opts = {
+			library = {
+				-- See the configuration section for more details
+				-- Load luvit types when the `vim.uv` word is found
+				{ path = "luvit-meta/library", words = { "vim%.uv" } },
+			},
+		},
+	},
+	{ "Bilal2453/luvit-meta", lazy = true }, -- optional `vim.uv` typings
+	{ -- optional completion source for require statements and module annotations
+		"hrsh7th/nvim-cmp",
+		opts = function(_, opts)
+			opts.sources = opts.sources or {}
+			table.insert(opts.sources, {
+				name = "lazydev",
+				group_index = 0, -- set group index to 0 to skip loading LuaLS completions
 			})
 		end,
 	},
