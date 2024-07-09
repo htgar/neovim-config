@@ -20,8 +20,9 @@
   "nvim-lspconfig": { "branch": "master", "commit": "0b8165cf95806bc4bb8f745bb0c92021b2ed4b98" },
   "nvim-treesitter": { "branch": "master", "commit": "14db0433e145c8ea63efc42ddbdf517d6036d372" },
   "nvim-web-devicons": { "branch": "master", "commit": "e37bb1feee9e7320c76050a55443fa843b4b6f83" },
-  "oil.nvim": { "branch": "master", "commit": "259b1fbc84734bfb74225b2c2f408dd7ed9cf474" },
+  "plenary.nvim": { "branch": "master", "commit": "a3e3bc82a3f95c5ed0d7201546d5d2c19b20d683" },
   "tmux.nvim": { "branch": "main", "commit": "da618e075f42793400c3ee1e59ef3ebada2cb23c" },
   "vim-rsi": { "branch": "master", "commit": "45540637ead22f011e8215f1c90142e49d946a54" },
-  "which-key.nvim": { "branch": "main", "commit": "4433e5ec9a507e5097571ed55c02ea9658fb268a" }
+  "which-key.nvim": { "branch": "main", "commit": "4433e5ec9a507e5097571ed55c02ea9658fb268a" },
+  "yazi.nvim": { "branch": "master", "commit": "b9f393f6b76b68d8a55ed3a8d57419437f84e060" }
 }

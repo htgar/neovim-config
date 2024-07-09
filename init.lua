@@ -100,6 +100,22 @@ require("lazy").setup({
 	-- 		vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 	-- 	end,
 	-- },
+	{
+		"mikavilpas/yazi.nvim",
+		event = "VeryLazy",
+		keys = {
+			{
+				"<leader>fm",
+				function()
+					require("yazi").yazi()
+				end,
+				desc = "[F]ind [M]anually",
+			},
+		},
+		opts = {
+			open_for_directories = true,
+		},
+	},
 
 	"tpope/vim-rsi",
 
