@@ -35,14 +35,24 @@ require("lazy").setup({
 		"folke/which-key.nvim",
 		event = "VimEnter", -- Sets the loading event to 'VimEnter'
 		config = function() -- This is the function that runs, AFTER loading
-			require("which-key").setup()
-
-			-- Document existing key chains
-			require("which-key").register({
-				["<leader>f"] = { name = "[F]ind", _ = "which_key_ignore" },
-				["<leader>g"] = { name = "[G]it", _ = "which_key_ignore" },
-				["<leader>l"] = { name = "[L]sp", _ = "which_key_ignore" },
+			require("which-key").setup({
+				preset = "modern",
+				icons = {
+					mappings = false,
+				},
 			})
+
+			require("which-key").add(
+				-- Document existing key chains
+				{
+					{ "<leader>f", group = "[F]ind" },
+					{ "<leader>f_", hidden = true },
+					{ "<leader>g", group = "[G]it" },
+					{ "<leader>g_", hidden = true },
+					{ "<leader>l", group = "[L]sp" },
+					{ "<leader>l_", hidden = true },
+				}
+			)
 		end,
 	},
 
