@@ -36,7 +36,6 @@ require("lazy").setup({
 		event = "VimEnter", -- Sets the loading event to 'VimEnter'
 		config = function() -- This is the function that runs, AFTER loading
 			require("which-key").setup({
-				preset = "modern",
 				icons = {
 					mappings = false,
 				},
@@ -51,6 +50,8 @@ require("lazy").setup({
 					{ "<leader>g_", hidden = true },
 					{ "<leader>l", group = "[L]sp" },
 					{ "<leader>l_", hidden = true },
+					{ "<leader>t", group = "[T]rouble" },
+					{ "<leader>t_", hidden = true },
 				}
 			)
 		end,
@@ -99,32 +100,15 @@ require("lazy").setup({
 		end,
 	},
 
-	-- Replaced with yazi
-	-- {
-	-- 	"stevearc/oil.nvim",
-	-- 	opts = {},
-	-- 	-- Optional dependencies
-	-- 	dependencies = { "nvim-tree/nvim-web-devicons" },
-	-- 	config = function()
-	-- 		require("oil").setup()
-	-- 		vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
-	-- 	end,
-	-- },
 	{
-		"mikavilpas/yazi.nvim",
-		event = "VeryLazy",
-		keys = {
-			{
-				"<leader>fm",
-				function()
-					require("yazi").yazi()
-				end,
-				desc = "[F]ind [M]anually",
-			},
-		},
-		opts = {
-			open_for_directories = true,
-		},
+		"stevearc/oil.nvim",
+		opts = {},
+		-- Optional dependencies
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+		config = function()
+			require("oil").setup()
+			vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+		end,
 	},
 
 	"tpope/vim-rsi",
@@ -233,6 +217,44 @@ require("lazy").setup({
 		end,
 	},
 
+	{
+		"folke/trouble.nvim",
+		opts = {}, -- for default options, refer to the configuration section for custom setup.
+		cmd = "Trouble",
+		keys = {
+			{
+				"<leader>td",
+				"<cmd>Trouble diagnostics toggle<cr>",
+				desc = "[T]rouble [D]iagnostics",
+			},
+			{
+				"<leader>tD",
+				"<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+				desc = "[T]rouble Buffer [D]iagnostics",
+			},
+			{
+				"<leader>tL",
+				"<cmd>Trouble loclist toggle<cr>",
+				desc = "[T]rouble [L]ocation List",
+			},
+			{
+				"<leader>tq",
+				"<cmd>Trouble qflist toggle<cr>",
+				desc = "[T]rouble [Q]uickfix List",
+			},
+			{
+				"<leader>ts",
+				"<cmd>Trouble symbols toggle focus=false<cr>",
+				desc = "[T]rouble [S]ymbols",
+			},
+			{
+				"<leader>tl",
+				"<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
+				desc = "[T]rouble [L]SP",
+			},
+		},
+	},
+
 	-- Fuzzy finding and File explorer
 	{
 		"ibhagwan/fzf-lua",
@@ -244,6 +266,19 @@ require("lazy").setup({
 			nmap_leader("ff", "<Cmd>FzfLua files<CR>", "[F]ind [F]uzzy")
 			nmap_leader("fg", "<Cmd>FzfLua live_grep<CR>", "[F]ind [G]rep")
 		end,
+	},
+
+	-- Find and replace
+	{
+		"nvim-pack/nvim-spectre",
+		dependencies = { "nvim-lua/plenary.nvim" },
+		keys = {
+			{
+				"<leader>fr",
+				"<cmd>lua require('spectre').toggle()<CR>",
+				desc = "[F]ind [R]eplace",
+			},
+		},
 	},
 
 	-- Treesitter
