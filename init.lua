@@ -108,6 +108,28 @@ require("noice").setup({
 })
 
 -- Fzf + Oil
+local actions = require'fzf-lua.actions'
+require 'fzf-lua'.setup({
+    actions = {
+        files = {
+            -- instead of the default action 'actions.file_edit_or_qf'
+            -- it's important to define all other actions here as this
+            -- table does not get merged with the global defaults
+            ["default"]       = actions.file_edit,
+            ["ctrl-s"]        = actions.file_split,
+            ["ctrl-v"]        = actions.file_vsplit,
+            ["ctrl-t"]        = actions.file_tabedit,
+            ["alt-q"]         = actions.file_sel_to_qf,
+        },
+        grep = {
+            actions = {
+                ['ctrl-q'] = {
+                    fn = actions.file_edit_or_qf, prefix = 'select-all+'
+                },
+            },
+        },
+    },
+})
 vim.keymap.set("n", "<Leader>ff", "<CMD>FzfLua files<CR>", { desc = "Find Files" })
 vim.keymap.set("n", "<Leader>fg", "<CMD>FzfLua live_grep<CR>", { desc = "Grep Files" })
 vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
@@ -207,7 +229,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
         --
         -- This may be unwanted, since they displace some of your code
         if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
-            map('<leader>th', function()
+            map('<leader>lh', function()
                 vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
             end, 'Toggle Inlay Hints')
         end
